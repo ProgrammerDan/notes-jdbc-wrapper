@@ -1,0 +1,3 @@
+#summary The sample java application to retrieve data from lotus
+
+= TODO =
