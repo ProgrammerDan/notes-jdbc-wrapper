@@ -4,7 +4,8 @@
 	<property name="dest.dir" value="build" />
 	<property name="dest.dir.classes" value="${dest.dir}/classes" />
 	<property name="dest.dir.lib" value="${dest.dir}" />
-	<property name="artefact" value="lnjdbc.jar" />
+	<property name="artefact.name" value="lnjdbc" />
+	<property name="artefact" value="${artefact.name}.jar" />
 
 	<path id="class.path">
 		<fileset dir="lib" >
@@ -73,7 +74,7 @@
 
 	<target name="svn-version" >
 		<!-- GET SVN REVISION INFORMATION -->
-		<tempfile property="svn.temp" deleteonexit="false"/>
+		<tempfile property="svn.temp" deleteonexit="true"/>
 		
 		<exec executable="svn" output="${svn.temp}">
 			<arg value="info"/>
@@ -111,5 +112,20 @@
 
 		<echo message="version=${svn.version}" />
 	</target>
+	
+	<target name="release" depends="clean,build" >
+		<copy file="readme.txt" todir="${dest.dir}">
+			<filterchain>
+				<expandproperties/>
+			</filterchain>
+		</copy>
+        <zip zipfile="${dest.dir}/${artefact.name}-${svn.version}.zip">
+			<zipfileset dir="${dest.dir}" includes="readme.txt"/>
+			<zipfileset dir="${dest.dir}" includes="*.jar"/>
+			<!--zipfileset dir="." includes="conf/**.*"/-->
+			<!--zipfileset dir="." includes="example/**/**.*"/-->
+        </zip>
+	</target>
+
 
 </project>
