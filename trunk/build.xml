@@ -55,7 +55,7 @@
 
 	<target name="deploy-init">
 		<echo message="initialize..."/>
-		<property name="scp.local.file" value="./deploy/${artefact}" />
+		<property name="scp.local.file" value="./build/${artefact}" />
 		<property name="scp.wsas.home" value="/esb/wso2wsas-3.1.0" />
 
 		<input message ="select deploy type [ test, prod ]" addproperty="deploy.type"/>  
