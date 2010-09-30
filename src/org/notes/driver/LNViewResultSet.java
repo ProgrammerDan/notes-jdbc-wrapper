@@ -152,10 +152,10 @@ public class LNViewResultSet implements ResultSet {
 				Vector vectorData = row.getColumnValues();
 				data.add(vectorData);
 			
-				row = columnsValue.getNextEntry();
+				row = columnsValue.getNextEntry(row);
 			}		
 	   }else{
-	       throw new LNException("Result Set is null" + columnsValue);
+	       throw new LNException("Result Set is null");
 	   }
 
     }
@@ -566,7 +566,7 @@ public class LNViewResultSet implements ResultSet {
             int i = md.getColumnIndex(columnName);
             return this.getString(i);
         } catch (Exception e) {
-            throw new LNException("Can't get value for column \"" + columnName + "\" : " + e.getMessage());
+            throw new LNException("Can't get value for column \"" + columnName + "\" : " + e.getMessage(),e);
         }
     }
 
@@ -935,7 +935,7 @@ public class LNViewResultSet implements ResultSet {
      */
     public Object getObject(int columnIndex) throws SQLException {
         try {
-            Object value = ((List) data.get(currentRow - 1)).get(columnIndex - 1);
+			Object value = ((List) data.get(currentRow - 1)).get(columnIndex - 1);
 			if (value == null){
 				wasNull = true;
 				return null;
@@ -944,7 +944,9 @@ public class LNViewResultSet implements ResultSet {
 				return value;
 			}
         } catch (Exception e) {
-            throw new LNException("can't get value for column " + columnIndex + " row " + (currentRow) + ": " + e);
+        	String s="";
+        	if(currentRow>0 && currentRow<=data.size())s=".\nData row="+data.get(currentRow - 1);
+            throw new LNException("can't get value for column " + columnIndex + " row " + (currentRow)+s, e);
         }
     }
 
