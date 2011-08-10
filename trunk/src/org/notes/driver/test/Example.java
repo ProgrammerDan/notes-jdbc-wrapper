@@ -7,6 +7,7 @@ import java.io.*;
 
 public class Example{
 
+	static long time = System.currentTimeMillis();	
 	static String driver="org.notes.driver.LNDriver";
 
 //	static String url="jdbc:org:notes:172.17.45.138:63148?db=names.nsf";
@@ -17,10 +18,13 @@ public class Example{
 //	static String url="jdbc:org:notes:172.17.44.132?db=App\\SalPrj\\SalPrj_Dictionary.nsf";
 //	static String uid="Approver5";
 //	static String pwd="RobinCrusoe";
-	static String url="jdbc:org:notes:Salo:63148?db=dover.nsf";
+/*	static String url="jdbc:org:notes:Salo:63148?db=dover.nsf";
 	static String uid="front_jboss";
 	static String pwd="front21";
-	static long time = System.currentTimeMillis();	
+*/
+	static String url="jdbc:org:notes:robinson?db=staff.nsf";
+	static String uid="Approver5";
+	static String pwd="RobinCrusoe";
 
 
 	public static void main(String arg[])throws Exception{
@@ -33,13 +37,14 @@ public class Example{
 		
 		
 
-	    String query = "SELECT VIEWLIST";
+	    String query = "SELECT VIEW (Export)\\ToAplfaGroup";
+	    //String query = "SELECT VIEW (by staffid)";
+	    //String query = "SELECT VIEWLIST";
+	    //String query = "SELECT VIEW Все";
+	    
 		String [] param = {};
 		execute(query, param, conn);
 		
-		
-		//query = "SELECT VIEW (Hidden)\\Dic_OLFs";
-		//execute(query, param, conn);
 		
 		conn.close();
 		

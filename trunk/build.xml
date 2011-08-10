@@ -40,7 +40,7 @@
 	</target>
 
 	<target name="build" depends="clean,prepare">
-		<javac srcdir="src" destdir="${dest.dir.classes}" includes="**" debug="true" debuglevel="lines,vars,source">
+		<javac srcdir="src" destdir="${dest.dir.classes}" includes="**" debug="true" debuglevel="lines,vars,source" encoding="windows-1251">
 			<classpath refid="class.path" />
 		</javac>
 		<jar basedir="${dest.dir.classes}" destfile="${dest.dir.lib}/${artefact}" manifest="${dest.dir.classes}/META-INF/manifest.mf"/>

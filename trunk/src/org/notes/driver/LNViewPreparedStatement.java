@@ -106,6 +106,7 @@ public class LNViewPreparedStatement extends LNStatement implements PreparedStat
 			
 			if(view==null)throw new LNException("Can't find view \""+viewName+"\"");
 			view.refresh();  //Clear CORBA cache. !!! should we do this every time? !!!
+			view.setAutoUpdate(false);
 			Vector<ViewColumn> cols=view.getColumns();			
 			Vector filter=new Vector();
 			System.out.println("Columns: "+LNViewListResultSet.toString(cols));
@@ -137,7 +138,7 @@ public class LNViewPreparedStatement extends LNStatement implements PreparedStat
 			}else{
 				data=view.getAllEntriesByKey(filter,true);
 			}
-	
+		    
 		    LNViewResultSet lnvrs = new LNViewResultSet(this, view.getColumnNames(), data);
 			return lnvrs;
 		} catch(Exception e) {

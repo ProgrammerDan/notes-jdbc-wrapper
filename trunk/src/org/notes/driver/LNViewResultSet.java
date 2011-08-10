@@ -151,8 +151,7 @@ public class LNViewResultSet implements ResultSet {
 			while(row != null){
 				Vector vectorData = row.getColumnValues();
 				data.add(vectorData);
-			
-				row = columnsValue.getNextEntry(row);
+				row = columnsValue.getNextEntry();
 			}		
 	   }else{
 	       throw new LNException("Result Set is null");
@@ -935,7 +934,14 @@ public class LNViewResultSet implements ResultSet {
      */
     public Object getObject(int columnIndex) throws SQLException {
         try {
-			Object value = ((List) data.get(currentRow - 1)).get(columnIndex - 1);
+			List row=(List) data.get(currentRow - 1);
+			Object value=null;
+			try{
+				value=row.get(columnIndex - 1);
+			}catch(ArrayIndexOutOfBoundsException e1){
+				if(columnIndex > md.getColumnCount())throw e1;
+			}
+			
 			if (value == null){
 				wasNull = true;
 				return null;
