@@ -42,7 +42,7 @@ public class Example{
 	    //String query = "SELECT VIEWLIST";
 	    //String query = "SELECT VIEW Все";
 	    
-		String [] param = {};
+		String [] param = {"ACCESS TEST"};
 		execute(query, param, conn);
 		
 		

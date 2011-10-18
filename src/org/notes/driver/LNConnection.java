@@ -100,6 +100,11 @@ public class LNConnection implements Connection {
     	}
     	return database;
     }
+    
+    
+    protected Session currentSession(){
+    	return session;
+    }
 
     private Session getLNSession() throws LNException{
     	if(session!=null){
